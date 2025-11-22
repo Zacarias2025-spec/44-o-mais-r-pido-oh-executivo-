@@ -1,325 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DZM Corretor</title>
-
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(to bottom, #0d1b2a, #1b263b, #415a77);
-        color: white;
-    }
-
-    /* Página de apresentação */
-    .hero {
-        text-align: center;
-        padding: 60px 20px;
-    }
-
-    .hero h1 {
-        font-size: 42px;
-        font-weight: bold;
-        margin-bottom: 5px;
-        color: #f8f9fa;
-    }
-
-    .hero h3 {
-        font-size: 16px;
-        color: #d9d9d9;
-        margin-bottom: 30px;
-    }
-
-    .hero p {
-        max-width: 650px;
-        margin: auto;
-        line-height: 1.6;
-        font-size: 17px;
-    }
-
-    .btn {
-        display: inline-block;
-        padding: 14px 24px;
-        margin-top: 25px;
-        background: #e63946;
-        color: white;
-        border-radius: 6px;
-        text-decoration: none;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .btn:hover {
-        background: #ff5c6a;
-    }
-
-    /* Página de produtos */
-    #products-page {
-        display: none;
-        padding: 20px;
-    }
-
-    .back-btn {
-        background: #457b9d;
-        padding: 12px 18px;
-        border-radius: 6px;
-        color: #fff;
-        text-decoration: none;
-        font-weight: bold;
-        display: inline-block;
-        margin-bottom: 20px;
-    }
-
-    .filter-container {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    select {
-        padding: 10px;
-        border-radius: 6px;
-        border: none;
-        font-size: 16px;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 20px;
-    }
-
-    .item {
-        background: #1d3557;
-        padding: 15px;
-        border-radius: 8px;
-        text-align: center;
-    }
-
-    .item img {
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-        border-radius: 6px;
-        background: #00000030;
-    }
-
-    .item h4 {
-        margin: 10px 0 5px;
-    }
-
-    .item button {
-        padding: 10px 16px;
-        border: none;
-        border-radius: 6px;
-        background: #e63946;
-        color: white;
-        cursor: pointer;
-    }
-
-    /* Modal */
-    #product-modal {
-        display: none;
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%;
-        height: 100%;
-        background: #000000d0;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-    }
-
-    .modal-content {
-        background: #1b263b;
-        padding: 20px;
-        max-width: 600px;
-        width: 100%;
-        border-radius: 8px;
-    }
-
-    .modal-content img {
-        width: 100%;
-        border-radius: 6px;
-        margin-bottom: 10px;
-    }
-
-    .close-btn {
-        background: #e63946;
-        padding: 10px;
-        width: 100%;
-        text-align: center;
-        border-radius: 8px;
-        margin-top: 10px;
-        cursor: pointer;
-    }
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DZM Corretor de Imóveis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; }
+    body { background-color: #f5f5f5; color:#333; }
+    header { text-align:center; padding:50px 20px; background:linear-gradient(90deg, #4facfe, #00f2fe); color:white; }
+    header h1 { font-size: 2.5em; margin-bottom: 10px; }
+    header p { font-size: 1em; margin-bottom: 20px; }
+    .btn { background-color:#ff5c5c; color:white; padding:15px 30px; text-decoration:none; border-radius:8px; font-weight:bold; transition:0.3s; }
+    .btn:hover { background-color:#e04848; }
+    section { padding:40px 20px; max-width:900px; margin:0 auto; text-align:center; }
+    section p { margin-bottom:15px; line-height:1.6; }
+    iframe { width:100%; height:300px; border:none; margin-bottom:20px; }
+  </style>
 </head>
 <body>
 
-<!-- PÁGINA DE APRESENTAÇÃO -->
-<section id="home">
-    <div class="hero">
-        <h1>DZM Corretor de Imóveis</h1>
-        <h3>Zacarias intermediário mais rápido oh Executivo</h3>
+<header>
+  <h1>DZM Corretor de Imóveis</h1>
+  <p>Zacarias intermediário mais rápido oh Executivo</p>
+  <a href="produtos.html" class="btn">Ver Produtos</a>
+</header>
 
-        <p>
-            Zacarias é um intermediário experiente, atuando há mais de 4 anos no mercado de Cabinda.
-            Reconhecido pela sua seriedade, transparência e capacidade de conectar clientes às melhores 
-            oportunidades, ele construiu uma reputação sólida baseada em confiança e eficiência.<br><br>
-
-            Com profundo conhecimento do mercado local, Zacarias auxilia na mediação de negócios, 
-            resolução de pendências e facilitação de processos, sempre oferecendo um atendimento 
-            personalizado e rápido.<br><br>
-
-            Profissional comprometido, sempre disponível para garantir que cada cliente tenha uma 
-            experiência segura, clara e objetiva.<br><br>
-
-            <b>Telefone:</b> 924 829 157<br>
-            <b>Cidade:</b> Cabinda
-        </p>
-
-        <a class="btn" onclick="openProducts()">Ver Produtos</a>
-        <br><br>
-        <a class="btn" onclick="openProducts()">Ver Produtos</a>
-    </div>
+<section>
+  <iframe src="https://otieu.com/4/10215868" title="Anúncio"></iframe>
+  <p>Zacarias é um intermediário experiente, atuando há mais de 4 anos no mercado de Cabinda. Reconhecido pela sua seriedade, transparência e capacidade de conectar clientes às melhores oportunidades, ele construiu uma reputação sólida baseada em confiança e eficiência.</p>
+  <p>Com profundo conhecimento do mercado local, Zacarias auxilia na mediação de negócios, resolução de pendências e facilitação de processos, sempre oferecendo um atendimento personalizado e rápido.</p>
+  <p>Profissional comprometido, sempre disponível para garantir que cada cliente tenha uma experiência segura, clara e objetiva.</p>
+  <p><strong>Telefone:</strong> 924 829 157</p>
+  <p><strong>Cidade:</strong> Cabinda</p>
 </section>
-
-<!-- PÁGINA DE PRODUTOS -->
-<section id="products-page">
-    <a class="back-btn" onclick="goBack()">← Voltar</a>
-
-    <div class="filter-container">
-        <select id="category-filter" onchange="renderProducts()">
-            <option value="all">Todos</option>
-            <option value="casas">Casas</option>
-            <option value="terrenos">Terrenos</option>
-            <option value="carros">Carros</option>
-            <option value="telefone">Telefone</option>
-            <option value="outros">Outros</option>
-        </select>
-    </div>
-
-    <div id="product-list" class="grid"></div>
-
-    <p style="text-align:center;margin-top:35px;">
-        Criado por DZM Corretor • WhatsApp: <b>997 711 838</b>
-    </p>
-</section>
-
-<!-- MODAL -->
-<div id="product-modal">
-    <div class="modal-content" id="modal-content"></div>
-</div>
-
-<script>
-const products = [
-    {
-        id: 1,
-        category: "casas",
-        name: "Apartamento T3 à venda",
-        price: "18 Milhões",
-        images: [
-            "https://ibb.co/C5XSBfFb",
-            "https://ibb.co/0VXBWSbQ",
-            "https://ibb.co/Qjn6xKgD",
-            "https://ibb.co/KcJcMjZy"
-        ],
-        description: `
-        Três Quartos<br> Sala<br> Cozinha<br> WC<br> Varanda<br>
-        Tudo limpo, forrado e mosaicado.<br><br>
-        Localização: Cabinda (Prédio dos Solteiros)
-        `
-    },
-    {
-        id: 2,
-        category: "casas",
-        name: "Residência T4 Mobilada",
-        price: "350.000 Kz",
-        images: [
-            "https://ibb.co/j9cPZmtx",
-            "https://ibb.co/Sw3Jjj3K",
-            "https://ibb.co/hR7ZbX4t",
-            "https://ibb.co/s9HzD5RZ"
-        ],
-        description: `
-        T4 totalmente mobilado.<br>Sala equipada.<br>Cozinha completa.<br>
-        Água e luz disponíveis.<br><br>Localização: 4 de Abril<br>
-        Contato: 935 544 477
-        `
-    },
-    {
-        id: 3,
-        category: "terrenos",
-        name: "Terreno 30x60 Cabassango",
-        price: "20 Milhões",
-        images: [
-            "https://ibb.co/kgxD6pvN",
-            "https://ibb.co/QvSPPgML",
-            "https://ibb.co/7dFzgW3C",
-            "https://ibb.co/BKtPnR5G",
-            "https://ibb.co/Rpx5fZwD",
-            "https://ibb.co/zVVr5cpS"
-        ],
-        description: `
-        Terreno 30/60m em área estratégica.<br>Localização: Cabassango, atrás do Puniv.
-        `
-    }
-];
-
-function openProducts() {
-    window.open("https://otieu.com/4/10215868", "_blank");
-    document.getElementById("home").style.display = "none";
-    document.getElementById("products-page").style.display = "block";
-    renderProducts();
-}
-
-function goBack() {
-    document.getElementById("home").style.display = "block";
-    document.getElementById("products-page").style.display = "none";
-}
-
-function renderProducts() {
-    const filter = document.getElementById("category-filter").value;
-    const container = document.getElementById("product-list");
-    container.innerHTML = "";
-
-    products
-        .filter(p => filter === "all" || p.category === filter)
-        .forEach(p => {
-            container.innerHTML += `
-                <div class="item">
-                    <img src="${p.images[0]}/" alt="">
-                    <h4>${p.name}</h4>
-                    <p><b>${p.price}</b></p>
-                    <button onclick="openModal(${p.id})">Ver Detalhes</button>
-                </div>
-            `;
-        });
-}
-
-function openModal(id) {
-    const product = products.find(p => p.id === id);
-    const modal = document.getElementById("product-modal");
-    const content = document.getElementById("modal-content");
-
-    content.innerHTML = `
-        <h2>${product.name}</h2>
-        <p><b>${product.price}</b></p>
-        <p>${product.description}</p>
-        ${product.images.map(img => `<img src="${img}/">`).join("")}
-        <div class="close-btn" onclick="closeModal()">Fechar</div>
-    `;
-
-    modal.style.display = "flex";
-}
-
-function closeModal() {
-    document.getElementById("product-modal").style.display = "none";
-}
-</script>
 
 </body>
 </html>
