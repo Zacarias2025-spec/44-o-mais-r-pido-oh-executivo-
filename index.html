@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DZM Corretor de Imóveis</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+header {
+    background: #222;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background: #111;
+    padding: 10px 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 6px 15px;
+    border-radius: 5px;
+}
+
+nav a.active {
+    background: #ffcc00;
+    color: black;
+}
+
+.page {
+    display: none;
+    padding: 20px;
+}
+
+.page.active {
+    display: block;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+button, .btn {
+    background: #ffcc00;
+    color: black;
+    border: none;
+    padding: 12px 18px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #ffdb4d;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(230px,1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.categories {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    background: #ddd;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.category-btn.active {
+    background: #ffcc00;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.gallery img {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.close {
+    float: right;
+    cursor: pointer;
+    font-size: 22px;
+    color: red;
+}
+
+/* ANÚNCIO */
+#ad-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#ad-popup iframe {
+    width: 90%;
+    height: 80%;
+    border-radius: 12px;
+}
+
+#ad-close {
+    background: red;
+    color: white;
+    position: fixed;
+    bottom: 40px;
+    padding: 12px 20px;
+    border-radius: 8px;
+}
+
+.creator-box {
+    margin-top: 40px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>DZM Corretor de Imóveis</header>
+
+<nav>
+    <a href="#" class="active" data-page="home">Apresentação</a>
+    <a href="#" data-page="produtos">Produtos</a>
+</nav>
+
+<!-- PÁGINA DE APRESENTAÇÃO -->
+<div id="home" class="page active">
+    <h1>DZM Corretor de Imóveis</h1>
+    <p style="text-align:center; font-size:14px; margin-top:-10px;">
+        Zacarias intermediário mais rápido oh Executivo
+    </p>
+
+    <p style="text-align:center; padding:10px 20px;">
+        Zacarias é um intermediário experiente, atuando há mais de 4 anos no mercado de Cabinda.
+        Reconhecido pela sua seriedade, transparência e capacidade de conectar clientes às melhores oportunidades.
+        <br><br>
+        Telefone: <b>924 829 157</b><br>
+        Cidade: <b>Cabinda</b>
+    </p>
+
+    <div style="text-align:center; margin-top:30px;">
+        <button id="btnToProducts">Ver Produtos</button>
+    </div>
+</div>
+
+<!-- PÁGINA DE PRODUTOS -->
+<div id="produtos" class="page">
+    <h2>Produtos</h2>
+
+    <div class="categories">
+        <div class="category-btn active" data-category="all">Todos</div>
+        <div class="category-btn" data-category="casas">Casas</div>
+        <div class="category-btn" data-category="carros">Carros</div>
+        <div class="category-btn" data-category="terrenos">Terrenos</div>
+        <div class="category-btn" data-category="telefone">Telefone</div>
+        <div class="category-btn" data-category="outros">Outros</div>
+    </div>
+
+    <div class="product-grid" id="productContainer"></div>
+
+    <div class="creator-box">
+        <h3>Criador do Site</h3>
+        <p>Site desenvolvido por um estudante e apaixonado por tecnologia.  
+        Contacto WhatsApp: <b>997711838</b></p>
+    </div>
+</div>
+
+<!-- MODAL PRODUTO -->
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="modalClose">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <p id="modalPrice"></p>
+        <p id="modalDesc"></p>
+
+        <div class="gallery" id="modalGallery"></div>
+
+        <button id="backToProducts" style="margin-top:20px;">Voltar</button>
+    </div>
+</div>
+
+<!-- POPUP DO ANÚNCIO -->
+<div id="ad-popup">
+    <iframe src=""></iframe>
+    <button id="ad-close">Fechar Anúncio</button>
+</div>
+
+<script>
+const pages = document.querySelectorAll(".page");
+const navLinks = document.querySelectorAll("nav a");
+
+navLinks.forEach(link => {
+    link.onclick = () => {
+        navLinks.forEach(l => l.classList.remove("active"));
+        link.classList.add("active");
+
+        pages.forEach(p => p.classList.remove("active"));
+        document.getElementById(link.dataset.page).classList.add("active");
+    };
+});
+
+/* PRODUTOS CADASTRADOS */
+const products = [
+    {
+        category: "casas",
+        name: "Apartamento T3",
+        price: "18 Milhões Kz",
+        desc: `
+Três Quartos, Sala, Cozinha, WC, Varanda.
+Localização: Cabinda (Prédio dos Solteiros).
+        `,
+        images: [
+            "https://ibb.co/C5XSBfFb",
+            "https://ibb.co/0VXBWSbQ",
+            "https://ibb.co/Qjn6xKgD",
+            "https://ibb.co/KcJcMjZy"
+        ]
+    },
+    {
+        category: "casas",
+        name: "Residência T4 Mobilada",
+        price: "350.000 Kz (Negociável)",
+        desc: `
+Localização: 4 de Abril.
+T4 Mobilada, Água e luz disponíveis.
+Contacto: 935 544 477
+        `,
+        images: [
+            "https://ibb.co/j9cPZmtx",
+            "https://ibb.co/Sw3Jjj3K",
+            "https://ibb.co/hR7ZbX4t",
+            "https://ibb.co/s9HzD5RZ"
+        ]
+    },
+    {
+        category: "terrenos",
+        name: "Terreno 30x60m",
+        price: "20 Milhões Kz",
+        desc: "Localização: Cabassango, atrás do Puniv.",
+        images: [
+            "https://ibb.co/kgxD6pvN",
+            "https://ibb.co/QvSPPgML",
+            "https://ibb.co/7dFzgW3C",
+            "https://ibb.co/BKtPnR5G",
+            "https://ibb.co/Rpx5fZwD",
+            "https://ibb.co/zVVr5cpS"
+        ]
+    },
+    {
+        category: "telefone",
+        name: "Telefone Semi-Novo",
+        price: "60.000 Kz",
+        desc: "Tudo limpo e operacional, com carregador.",
+        images: [
+            "https://ibb.co/pBT8RDfp",
+            "https://ibb.co/rfmZVs06",
+            "https://ibb.co/W4R7nrP3"
+        ]
+    },
+    {
+        category: "outros",
+        name: "Kit Completo Hilti",
+        price: "1.042.015 Kz",
+        desc: "Martelo perf., brocas, mala e acessórios.",
+        images: [
+            "https://ibb.co/Z73Zr85",
+            "https://ibb.co/KzLLvtd4",
+            "https://ibb.co/Z1WZNb8Q"
+        ]
+    },
+    {
+        category: "carros",
+        name: "Kia Soul",
+        price: "5.800.000 Kz (Negociável)",
+        desc: "Motor selado, pintura boa, interior limpo.",
+        images: [
+            "https://ibb.co/fYQd72JZ",
+            "https://ibb.co/7JccRrbN",
+            "https://ibb.co/7twWPCFZ",
+            "https://ibb.co/Kjt48ZTp"
+        ]
+    },
+    {
+        category: "carros",
+        name: "Toyota Hilux",
+        price: "4.500.000 Kz",
+        desc: "Motor seco. Problema no turbo.",
+        images: [
+            "https://ibb.co/rGZTdvy4",
+            "https://ibb.co/mFFXC5Px"
+        ]
+    },
+    {
+        category: "carros",
+        name: "Hyundai i10",
+        price: "5.000.000 Kz",
+        desc: "Motor 1.2, AC Rússia, documentos em ordem.",
+        images: [
+            "https://ibb.co/vvwv069F",
+            "https://ibb.co/C3PXgrQz",
+            "https://ibb.co/7txsQ6PB",
+            "https://ibb.co/N6rVwsYz",
+            "https://ibb.co/V0HM2CDv",
+            "https://ibb.co/5xkkQ5DY"
+        ]
+    }
+];
+
+/* RENDERIZAR PRODUTOS */
+function loadProducts(category = "all") {
+    const container = document.getElementById("productContainer");
+    container.innerHTML = "";
+
+    products
+        .filter(p => category === "all" || p.category === category)
+        .forEach((p, index) => {
+            container.innerHTML += `
+                <div class="product-card">
+                    <img src="${p.images[0]}" alt="">
+                    <h3>${p.name}</h3>
+                    <p><b>${p.price}</b></p>
+                    <button onclick="openProduct(${index})">Ver Detalhes</button>
+                </div>
+            `;
+        });
+}
+
+loadProducts();
+
+/* FILTROS */
+document.querySelectorAll(".category-btn").forEach(btn => {
+    btn.onclick = () => {
+        document.querySelectorAll(".category-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        loadProducts(btn.dataset.category);
+    };
+});
+
+/* MODAL */
+function openProduct(index) {
+    const p = products[index];
+
+    document.getElementById("modalTitle").innerText = p.name;
+    document.getElementById("modalPrice").innerText = p.price;
+    document.getElementById("modalDesc").innerText = p.desc;
+
+    let gal = "";
+    p.images.forEach(img => {
+        gal += `<img src="${img}">`;
+    });
+
+    document.getElementById("modalGallery").innerHTML = gal;
+
+    document.getElementById("productModal").style.display = "flex";
+}
+
+document.getElementById("modalClose").onclick = () => {
+    document.getElementById("productModal").style.display = "none";
+};
+
+document.getElementById("backToProducts").onclick = () => {
+    document.getElementById("productModal").style.display = "none";
+};
+
+/* ANÚNCIO */
+const adPopup = document.getElementById("ad-popup");
+const adFrame = adPopup.querySelector("iframe");
+
+document.getElementById("btnToProducts").onclick = () => {
+    adPopup.style.display = "flex";
+    adFrame.src = "https://otieu.com/4/10215868";
+};
+
+document.getElementById("ad-close").onclick = () => {
+    adPopup.style.display = "none";
+    adFrame.src = "";
+    document.querySelector('[data-page="produtos"]').click();
+};
+</script>
+
+</body>
+          </html>
