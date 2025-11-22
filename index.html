@@ -6,268 +6,190 @@
 <title>DZM Corretor de Imóveis</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-}
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+    }
 
-header {
-    background: #222;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-}
+    header {
+        background: #0d60ff;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        font-size: 26px;
+        font-weight: bold;
+    }
 
-nav {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    background: #111;
-    padding: 10px 0;
-}
+    .container {
+        padding: 20px;
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        border-radius: 10px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    padding: 6px 15px;
-    border-radius: 5px;
-}
+    h1 {
+        text-align: center;
+        color: #0d60ff;
+        font-size: 32px;
+    }
 
-nav a.active {
-    background: #ffcc00;
-    color: black;
-}
+    .subtitle {
+        text-align: center;
+        margin-top: -10px;
+        font-size: 14px;
+        color: #333;
+    }
 
-.page {
-    display: none;
-    padding: 20px;
-}
+    .btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        background: #0d60ff;
+        color: white;
+        padding: 12px;
+        font-size: 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        margin-top: 20px;
+    }
 
-.page.active {
-    display: block;
-}
+    .btn:hover {
+        background: #0047cc;
+    }
 
-h1 {
-    text-align: center;
-    margin-top: 10px;
-}
+    /* Produtos */
+    .category-bar {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
 
-button, .btn {
-    background: #ffcc00;
-    color: black;
-    border: none;
-    padding: 12px 18px;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-}
+    .category-btn {
+        padding: 8px 15px;
+        background: #ddd;
+        border-radius: 20px;
+        cursor: pointer;
+    }
 
-.btn:hover {
-    background: #ffdb4d;
-}
+    .category-btn.active {
+        background: #0d60ff;
+        color: white;
+    }
 
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(230px,1fr));
-    gap: 15px;
-    margin-top: 20px;
-}
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+    }
 
-.product-card {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    text-align: center;
-    padding-bottom: 10px;
-}
+    .card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 10px;
+        text-align: center;
+    }
 
-.product-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
+    .card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
 
-.categories {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
+    /* Detalhes */
+    .details {
+        display: none;
+    }
 
-.category-btn {
-    background: #ddd;
-    padding: 8px 15px;
-    border-radius: 6px;
-    cursor: pointer;
-}
+    .gallery img {
+        width: 100%;
+        margin-top: 10px;
+        border-radius: 10px;
+    }
 
-.category-btn.active {
-    background: #ffcc00;
-}
-
-.modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background: white;
-    width: 90%;
-    max-width: 500px;
-    border-radius: 10px;
-    padding: 20px;
-}
-
-.gallery img {
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 8px;
-}
-
-.close {
-    float: right;
-    cursor: pointer;
-    font-size: 22px;
-    color: red;
-}
-
-/* ANÚNCIO */
-#ad-popup {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-#ad-popup iframe {
-    width: 90%;
-    height: 80%;
-    border-radius: 12px;
-}
-
-#ad-close {
-    background: red;
-    color: white;
-    position: fixed;
-    bottom: 40px;
-    padding: 12px 20px;
-    border-radius: 8px;
-}
-
-.creator-box {
-    margin-top: 40px;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-}
+    .back-btn {
+        background: #333;
+        margin-bottom: 20px;
+    }
 
 </style>
 </head>
-
 <body>
 
 <header>DZM Corretor de Imóveis</header>
 
-<nav>
-    <a href="#" class="active" data-page="home">Apresentação</a>
-    <a href="#" data-page="produtos">Produtos</a>
-</nav>
-
-<!-- PÁGINA DE APRESENTAÇÃO -->
-<div id="home" class="page active">
+<div id="home" class="container">
     <h1>DZM Corretor de Imóveis</h1>
-    <p style="text-align:center; font-size:14px; margin-top:-10px;">
-        Zacarias intermediário mais rápido oh Executivo
-    </p>
+    <p class="subtitle">Zacarias intermediário mais rápido oh Executivo</p>
 
-    <p style="text-align:center; padding:10px 20px;">
+    <a class="btn" onclick="openAdAndProducts()">Ver Produtos</a>
+
+    <p style="margin-top:20px; line-height: 1.6; text-align: justify;">
         Zacarias é um intermediário experiente, atuando há mais de 4 anos no mercado de Cabinda.
-        Reconhecido pela sua seriedade, transparência e capacidade de conectar clientes às melhores oportunidades.
-        <br><br>
-        Telefone: <b>924 829 157</b><br>
-        Cidade: <b>Cabinda</b>
+        Reconhecido pela sua seriedade, transparência e capacidade de conectar clientes às melhores
+        oportunidades, ele construiu uma reputação sólida baseada em confiança e eficiência. <br><br>
+        Com profundo conhecimento do mercado local, Zacarias auxilia na mediação de negócios,
+        resolução de pendências e facilitação de processos, sempre oferecendo um atendimento
+        personalizado e rápido. <br><br>
+        Profissional comprometido, sempre disponível para garantir que cada cliente tenha uma
+        experiência segura, clara e objetiva. <br><br>
+
+        <strong>Telefone:</strong> 924 829 157<br>
+        <strong>Cidade:</strong> Cabinda
     </p>
 
-    <div style="text-align:center; margin-top:30px;">
-        <button id="btnToProducts">Ver Produtos</button>
-    </div>
+    <a class="btn" onclick="openAdAndProducts()">Ver Produtos</a>
 </div>
 
-<!-- PÁGINA DE PRODUTOS -->
-<div id="produtos" class="page">
-    <h2>Produtos</h2>
+<!-- Página de Produtos -->
+<div id="products" class="container" style="display:none;">
+    <h2>Produtos Disponíveis</h2>
 
-    <div class="categories">
-        <div class="category-btn active" data-category="all">Todos</div>
-        <div class="category-btn" data-category="casas">Casas</div>
-        <div class="category-btn" data-category="carros">Carros</div>
-        <div class="category-btn" data-category="terrenos">Terrenos</div>
-        <div class="category-btn" data-category="telefone">Telefone</div>
-        <div class="category-btn" data-category="outros">Outros</div>
+    <div class="category-bar">
+        <div class="category-btn active" onclick="filterProducts('all')">Todos</div>
+        <div class="category-btn" onclick="filterProducts('casas')">Casas</div>
+        <div class="category-btn" onclick="filterProducts('terrenos')">Terrenos</div>
+        <div class="category-btn" onclick="filterProducts('telefone')">Telefones</div>
+        <div class="category-btn" onclick="filterProducts('outros')">Outros</div>
+        <div class="category-btn" onclick="filterProducts('carros')">Carros</div>
     </div>
 
-    <div class="product-grid" id="productContainer"></div>
-
-    <div class="creator-box">
-        <h3>Criador do Site</h3>
-        <p>Site desenvolvido por um estudante e apaixonado por tecnologia.  
-        Contacto WhatsApp: <b>997711838</b></p>
-    </div>
+    <div id="productGrid" class="grid"></div>
 </div>
 
-<!-- MODAL PRODUTO -->
-<div id="productModal" class="modal">
-    <div class="modal-content">
-        <span class="close" id="modalClose">&times;</span>
-        <h2 id="modalTitle"></h2>
-        <p id="modalPrice"></p>
-        <p id="modalDesc"></p>
-
-        <div class="gallery" id="modalGallery"></div>
-
-        <button id="backToProducts" style="margin-top:20px;">Voltar</button>
-    </div>
-</div>
-
-<!-- POPUP DO ANÚNCIO -->
-<div id="ad-popup">
-    <iframe src=""></iframe>
-    <button id="ad-close">Fechar Anúncio</button>
-</div>
+<!-- Detalhes -->
+<div id="details" class="container details"></div>
 
 <script>
-const pages = document.querySelectorAll(".page");
-const navLinks = document.querySelectorAll("nav a");
 
-navLinks.forEach(link => {
-    link.onclick = () => {
-        navLinks.forEach(l => l.classList.remove("active"));
-        link.classList.add("active");
+const adURL = "https://otieu.com/4/10215868";
 
-        pages.forEach(p => p.classList.remove("active"));
-        document.getElementById(link.dataset.page).classList.add("active");
-    };
-});
+function openAdAndProducts() {
+    window.open(adURL, "_blank");
+    document.getElementById("home").style.display = "none";
+    document.getElementById("products").style.display = "block";
+}
 
-/* PRODUTOS CADASTRADOS */
 const products = [
     {
         category: "casas",
-        name: "Apartamento T3",
-        price: "18 Milhões Kz",
-        desc: `
-Três Quartos, Sala, Cozinha, WC, Varanda.
-Localização: Cabinda (Prédio dos Solteiros).
+        name: "Apartamento T3 – Cabinda",
+        price: "18 Milhões",
+        description: `
+            - Três Quartos <br>
+            - Sala <br>
+            - Cozinha <br>
+            - WC <br>
+            - Varanda <br>
+            - Tudo Limpo e Musaicado <br>
+            - Localização: Prédio dos Solteiros
         `,
         images: [
             "https://ibb.co/C5XSBfFb",
@@ -276,14 +198,17 @@ Localização: Cabinda (Prédio dos Solteiros).
             "https://ibb.co/KcJcMjZy"
         ]
     },
+
     {
         category: "casas",
-        name: "Residência T4 Mobilada",
+        name: "Residência T4 Mobilada – 4 de Abril",
         price: "350.000 Kz (Negociável)",
-        desc: `
-Localização: 4 de Abril.
-T4 Mobilada, Água e luz disponíveis.
-Contacto: 935 544 477
+        description: `
+            - T4 Mobilada <br>
+            - Sala Equipada <br>
+            - Cozinha com Eletrodomésticos <br>
+            - Água e Luz Disponível <br>
+            - Contacto: 935 544 477
         `,
         images: [
             "https://ibb.co/j9cPZmtx",
@@ -292,11 +217,16 @@ Contacto: 935 544 477
             "https://ibb.co/s9HzD5RZ"
         ]
     },
+
     {
         category: "terrenos",
-        name: "Terreno 30x60m",
-        price: "20 Milhões Kz",
-        desc: "Localização: Cabassango, atrás do Puniv.",
+        name: "Terreno 30x60 – Cabassango",
+        price: "20 Milhões",
+        description: `
+            - Medidas 30/60 <br>
+            - Localização Estratégica <br>
+            - Atrás do Puniv (Cabassango)
+        `,
         images: [
             "https://ibb.co/kgxD6pvN",
             "https://ibb.co/QvSPPgML",
@@ -306,33 +236,49 @@ Contacto: 935 544 477
             "https://ibb.co/zVVr5cpS"
         ]
     },
+
     {
         category: "telefone",
-        name: "Telefone Semi-Novo",
+        name: "Telefone Completo – Semi Novo",
         price: "60.000 Kz",
-        desc: "Tudo limpo e operacional, com carregador.",
+        description: `
+            - Semi novo <br>
+            - Com carregador <br>
+            - Tudo funcional
+        `,
         images: [
             "https://ibb.co/pBT8RDfp",
             "https://ibb.co/rfmZVs06",
             "https://ibb.co/W4R7nrP3"
         ]
     },
+
     {
         category: "outros",
-        name: "Kit Completo Hilti",
+        name: "Kit de Ferramentas Hilti Completo",
         price: "1.042.015 Kz",
-        desc: "Martelo perf., brocas, mala e acessórios.",
+        description: `
+            - Mala Completa <br>
+            - Brocas <br>
+            - Hilti Grease <br>
+            - Equipamento profissional
+        `,
         images: [
             "https://ibb.co/Z73Zr85",
             "https://ibb.co/KzLLvtd4",
             "https://ibb.co/Z1WZNb8Q"
         ]
     },
+
     {
         category: "carros",
-        name: "Kia Soul",
-        price: "5.800.000 Kz (Negociável)",
-        desc: "Motor selado, pintura boa, interior limpo.",
+        name: "KIA SOUL – Dono aflito",
+        price: "5.800.000 Kz",
+        description: `
+            - Motor selado <br>
+            - Pintura excelente <br>
+            - Interior limpo
+        `,
         images: [
             "https://ibb.co/fYQd72JZ",
             "https://ibb.co/7JccRrbN",
@@ -340,21 +286,31 @@ Contacto: 935 544 477
             "https://ibb.co/Kjt48ZTp"
         ]
     },
+
     {
         category: "carros",
-        name: "Toyota Hilux",
+        name: "Hilux – Motor seco",
         price: "4.500.000 Kz",
-        desc: "Motor seco. Problema no turbo.",
+        description: `
+            - Motor seco <br>
+            - Pintura limpa <br>
+            - Problema de turbo
+        `,
         images: [
             "https://ibb.co/rGZTdvy4",
             "https://ibb.co/mFFXC5Px"
         ]
     },
+
     {
         category: "carros",
-        name: "Hyundai i10",
-        price: "5.000.000 Kz",
-        desc: "Motor 1.2, AC Rússia, documentos em ordem.",
+        name: "Hyundai i10 – Automático",
+        price: "5 Milhões",
+        description: `
+            - Motor seco <br>
+            - AC Rússia <br>
+            - Documentos em ordem
+        `,
         images: [
             "https://ibb.co/vvwv069F",
             "https://ibb.co/C3PXgrQz",
@@ -366,78 +322,61 @@ Contacto: 935 544 477
     }
 ];
 
-/* RENDERIZAR PRODUTOS */
-function loadProducts(category = "all") {
-    const container = document.getElementById("productContainer");
-    container.innerHTML = "";
+function renderProducts(list) {
+    const grid = document.getElementById("productGrid");
+    grid.innerHTML = "";
 
-    products
-        .filter(p => category === "all" || p.category === category)
-        .forEach((p, index) => {
-            container.innerHTML += `
-                <div class="product-card">
-                    <img src="${p.images[0]}" alt="">
-                    <h3>${p.name}</h3>
-                    <p><b>${p.price}</b></p>
-                    <button onclick="openProduct(${index})">Ver Detalhes</button>
-                </div>
-            `;
-        });
-}
-
-loadProducts();
-
-/* FILTROS */
-document.querySelectorAll(".category-btn").forEach(btn => {
-    btn.onclick = () => {
-        document.querySelectorAll(".category-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        loadProducts(btn.dataset.category);
-    };
-});
-
-/* MODAL */
-function openProduct(index) {
-    const p = products[index];
-
-    document.getElementById("modalTitle").innerText = p.name;
-    document.getElementById("modalPrice").innerText = p.price;
-    document.getElementById("modalDesc").innerText = p.desc;
-
-    let gal = "";
-    p.images.forEach(img => {
-        gal += `<img src="${img}">`;
+    list.forEach((p, index) => {
+        grid.innerHTML += `
+            <div class="card">
+                <img src="${p.images[0]}" alt="">
+                <h3>${p.name}</h3>
+                <p><strong>${p.price}</strong></p>
+                <button class="btn" onclick="showDetails(${index})">Ver Detalhes</button>
+            </div>
+        `;
     });
-
-    document.getElementById("modalGallery").innerHTML = gal;
-
-    document.getElementById("productModal").style.display = "flex";
 }
 
-document.getElementById("modalClose").onclick = () => {
-    document.getElementById("productModal").style.display = "none";
-};
+function filterProducts(category) {
+    document.querySelectorAll(".category-btn").forEach(btn => btn.classList.remove("active"));
+    document.querySelector(`.category-btn[onclick="filterProducts('${category}')"]`).classList.add("active");
 
-document.getElementById("backToProducts").onclick = () => {
-    document.getElementById("productModal").style.display = "none";
-};
+    if (category === "all") renderProducts(products);
+    else renderProducts(products.filter(p => p.category === category));
+}
 
-/* ANÚNCIO */
-const adPopup = document.getElementById("ad-popup");
-const adFrame = adPopup.querySelector("iframe");
+renderProducts(products);
 
-document.getElementById("btnToProducts").onclick = () => {
-    adPopup.style.display = "flex";
-    adFrame.src = "https://otieu.com/4/10215868";
-};
+function showDetails(i) {
+    const p = products[i];
+    document.getElementById("products").style.display = "none";
 
-document.getElementById("ad-close").onclick = () => {
-    adPopup.style.display = "none";
-    adFrame.src = "";
-    document.querySelector('[data-page="produtos"]').click();
-};
+    document.getElementById("details").innerHTML = `
+        <button class="btn back-btn" onclick="backToProducts()">Voltar</button>
+        <h2>${p.name}</h2>
+        <p><strong>Preço:</strong> ${p.price}</p>
+        <p>${p.description}</p>
+
+        <h3>Imagens:</h3>
+        <div class="gallery">
+            ${p.images.map(img => `<img src="${img}">`).join("")}
+        </div>
+
+        <br><hr><br>
+
+        <p><strong>Criador do Site:</strong> WhatsApp: 997711838</p>
+    `;
+
+    document.getElementById("details").style.display = "block";
+}
+
+function backToProducts() {
+    document.getElementById("details").style.display = "none";
+    document.getElementById("products").style.display = "block";
+}
+
 </script>
 
 </body>
-          </html>
+</html>
