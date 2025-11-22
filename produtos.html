@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produtos - DZM Corretor de Imóveis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; }
+    body { background-color:#f5f5f5; color:#333; }
+    header { text-align:center; padding:30px 20px; background:linear-gradient(90deg, #4facfe, #00f2fe); color:white; }
+    header h1 { font-size:2em; }
+    nav { text-align:center; margin:20px 0; }
+    nav button { margin:5px; padding:10px 20px; border:none; border-radius:6px; background-color:#ff5c5c; color:white; cursor:pointer; transition:0.3s; }
+    nav button:hover { background-color:#e04848; }
+    .produtos { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; max-width:1000px; margin:0 auto; padding:20px; }
+    .produto { background:white; padding:15px; border-radius:10px; text-align:center; box-shadow:0 4px 6px rgba(0,0,0,0.1); }
+    .produto img { width:100%; height:200px; object-fit:cover; border-radius:6px; margin-bottom:10px; }
+    .btn { display:inline-block; margin-top:10px; padding:8px 15px; background:#4facfe; color:white; border-radius:6px; text-decoration:none; transition:0.3s; }
+    .btn:hover { background:#00f2fe; }
+    .detalhes { max-width:800px; margin:0 auto; padding:20px; background:white; border-radius:10px; box-shadow:0 4px 6px rgba(0,0,0,0.1); display:none; }
+    .detalhes img { width:100%; max-height:300px; object-fit:cover; margin-bottom:10px; border-radius:6px; }
+    footer { text-align:center; margin:40px 0; font-size:0.9em; color:#555; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Produtos</h1>
+</header>
+
+<nav>
+  <button onclick="filtrar('todos')">Todos</button>
+  <button onclick="filtrar('casas')">Casas</button>
+  <button onclick="filtrar('carros')">Carros</button>
+  <button onclick="filtrar('terrenos')">Terrenos</button>
+  <button onclick="filtrar('tecnologia')">Tecnologia</button>
+  <button onclick="filtrar('outros')">Outros</button>
+</nav>
+
+<div class="produtos" id="produtos"></div>
+
+<div class="detalhes" id="detalhes">
+  <h2 id="detalhes-titulo"></h2>
+  <div id="detalhes-imagens"></div>
+  <p id="detalhes-preco"></p>
+  <p id="detalhes-descricao"></p>
+  <a href="#" class="btn" onclick="voltar()">Voltar</a>
+</div>
+
+<footer>
+  <p>Site criado por Zacarias - WhatsApp: 997711838</p>
+</footer>
+
+<script>
+const produtosData = [
+  // Casas
+  {
+    categoria:'casas',
+    nome:'Apartamento A Venda Na Cidade T3',
+    preco:'18 Milhões',
+    descricao:'Três Quartos, Sala, Cuzinha, Wc, Varanda, Tudo Limpo Forrado e Musaicado, Localização: Cabinda[Prédio Dos Solteiros].',
+    imagens:[
+      'https://ibb.co/C5XSBfFb',
+      'https://ibb.co/0VXBWSbQ',
+      'https://ibb.co/Qjn6xKgD',
+      'https://ibb.co/KcJcMjZy'
+    ]
+  },
+  {
+    categoria:'casas',
+    nome:'Residência T4 Mobilada',
+    preco:'350.000 Kz (negociável)',
+    descricao:'Localização: 4 de Abril. Totalmente mobilada, Sala equipada, Cozinha com eletrodomésticos, Casas de banho funcionais, Água e luz disponíveis.',
+    imagens:[
+      'https://ibb.co/j9cPZmtx',
+      'https://ibb.co/Sw3Jjj3K',
+      'https://ibb.co/hR7ZbX4t',
+      'https://ibb.co/s9HzD5RZ'
+    ]
+  },
+  // Terrenos
+  {
+    categoria:'terrenos',
+    nome:'Terreno Super Localizado',
+    preco:'20 Milhões',
+    descricao:'30/60 Metros, Localização: Cabinda[Cabassango Atrás Do Puniv]. Aproveite esta oportunidade para seus projectos.',
+    imagens:[
+      'https://ibb.co/kgxD6pvN',
+      'https://ibb.co/QvSPPgML',
+      'https://ibb.co/7dFzgW3C',
+      'https://ibb.co/BKtPnR5G',
+      'https://ibb.co/Rpx5fZwD',
+      'https://ibb.co/zVVr5cpS'
+    ]
+  },
+  // Tecnologia
+  {
+    categoria:'tecnologia',
+    nome:'Telefone 1',
+    preco:'60 mil',
+    descricao:'Tudo Limpo e Operacional Com Direito Ao Carregador Semi Nova Na Caixa. Localização: Amilcar',
+    imagens:[
+      'https://ibb.co/pBT8RDfp',
+      'https://ibb.co/rfmZVs06',
+      'https://ibb.co/W4R7nrP3'
+    ]
+  },
+  // Outros
+  {
+    categoria:'outros',
+    nome:'Kit Martelo perf. TE 3-M 230V',
+    preco:'1.090.390 Kz',
+    descricao:'Tudo completo com extras: Martelo, Adaptador, Mala, Hilti Grease, Brocas TE-CX 5/12, 6/17, 8/17, 10/17, 12/17.',
+    imagens:[
+      'https://ibb.co/Z73Zr85',
+      'https://ibb.co/KzLLvtd4',
+      'https://ibb.co/Z1WZNb8Q'
+    ]
+  },
+  // Carros
+  {
+    categoria:'carros',
+    nome:'KIA Soul',
+    preco:'5.800.000 Kz (Negociável)',
+    descricao:'AC não funciona, Motor selado, Pintura em dia, Limpo dentro e fora, Jantas especiais. Localização: Cabinda',
+    imagens:[
+      'https://ibb.co/fYQd72JZ',
+      'https://ibb.co/7JccRrbN',
+      'https://ibb.co/7twWPCFZ',
+      'https://ibb.co/Kjt48ZTp'
+    ]
+  },
+  {
+    categoria:'carros',
+    nome:'Hilux',
+    preco:'4.500.000 Kz (Negociável)',
+    descricao:'Motor seco, Pintura limpa, Problema de turbo. Localização: Cidade de Cabinda.',
+    imagens:[
+      'https://ibb.co/rGZTdvy4',
+      'https://ibb.co/mFFXC5Px'
+    ]
+  },
+  {
+    categoria:'carros',
+    nome:'I10 1.2',
+    preco:'5 Milhões',
+    descricao:'Motor seco, Caixa automática, AC:Rússia, Pintura limpa, Carro sem história, Documentos em ordem. Localização: Cidade de Cabinda.',
+    imagens:[
+      'https://ibb.co/vvwv069F',
+      'https://ibb.co/C3PXgrQz',
+      'https://ibb.co/7txsQ6PB',
+      'https://ibb.co/N6rVwsYz',
+      'https://ibb.co/V0HM2CDv',
+      'https://ibb.co/5xkkQ5DY'
+    ]
+  }
+];
+
+const produtosContainer = document.getElementById('produtos');
+const detalhesContainer = document.getElementById('detalhes');
+const detalhesTitulo = document.getElementById('detalhes-titulo');
+const detalhesImagens = document.getElementById('detalhes-imagens');
+const detalhesPreco = document.getElementById('detalhes-preco');
+const detalhesDescricao = document.getElementById('detalhes-descricao');
+
+function mostrarProdutos(produtos) {
+  produtosContainer.innerHTML = '';
+  produtos.forEach((p, index) => {
+    const div = document.createElement('div');
+    div.className = 'produto';
+    div.innerHTML = `
+      <img src="${p.imagens[0]}" alt="${p.nome}">
+      <h3>${p.nome}</h3>
+      <p>${p.preco}</p>
+      <a href="#" class="btn" onclick="verDetalhes(${index})">Ver Detalhes</a>
+    `;
+    produtosContainer.appendChild(div);
+  });
+}
+
+function verDetalhes(index) {
+  const p = produtosData[index];
+  detalhesTitulo.textContent = p.nome;
+  detalhesPreco.textContent = `Preço: ${p.preco}`;
+  detalhesDescricao.textContent = p.descricao;
+  detalhesImagens.innerHTML = '';
+  p.imagens.forEach(img => {
+    const i = document.createElement('img');
+    i.src = img;
+    detalhesImagens.appendChild(i);
+  });
+  produtosContainer.style.display = 'none';
+  detalhesContainer.style.display = 'block';
+}
+
+function voltar() {
+  detalhesContainer.style.display = 'none';
+  produtosContainer.style.display = 'grid';
+}
+
+function filtrar(categoria) {
+  if(categoria === 'todos') mostrarProdutos(produtosData);
+  else mostrarProdutos(produtosData.filter(p => p.categoria === categoria));
+}
+
+// Inicializar com todos os produtos
+mostrarProdutos(produtosData);
+</script>
+
+</body>
+</html>
